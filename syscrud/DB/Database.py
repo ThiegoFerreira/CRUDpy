@@ -60,6 +60,19 @@ class Database():
 
         finally:
             self.close_connection()
+    def select_product(self):
+        self.connect()
+        try:
+            self.cursor.execute("SELECT * FROM produto;")
+            produtos = self.cursor.fetchall()
+            
+            return produtos
+
+        except Exception as error:
+            print(error)
+
+        finally:
+            self.close_connection()
 
     def select_client_by_id(self,id):
         self.connect()
