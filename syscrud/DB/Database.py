@@ -151,9 +151,9 @@ class Database():
         except Exception as error:
             print(error)
 
-# if __name__ == "__main__":
-#     db = Database()
-#     db.connect()
+if __name__ == "__main__":
+    db = Database()
+    db.connect()
     # db.insert_client()
     # db.select_client()
     # db.select_client_by_id(2)

@@ -1,51 +1,54 @@
 from Entity.Pessoa import Pessoa
 
-escolha = int(input("Escolha (1) para cadastar, escolha (2) para listar, escolha (3) atualizar, escolha(4) para deletar e escolha (0) para sair: "))
-
-while escolha != 0:
-    try:
-        if escolha == 1:
-            escolha2 = int(input("Escolha (1) para cadastrar usuário, escolha (2) para cadastrar produto, escolha (0) para sair: "))
-            while escolha2 != 0:
-                # try:
-                    if escolha2 == 1:
-                        nome = input("Digite o nome: ")
-                        email = input("Digite o email: ")
-                        fone = input("Digite o telefone: ")
-                        endereco = input("Digite o endereço: ")
-                        cidade = input("Digite a cidade: ")
-                        tupla = (nome,email,fone,endereco,cidade)
-                        bd = 
-
-                        
-                    elif escolha2 == 2:
-                        nome = input("Digite o nome: ")
-                        marca = input("Digite a marca: ")
-                        modelo = input("Digite o modelo: ")
-                        descricao = input("Digite a descricao: ")
-                        preco = input("Digite o preco: ")
-                        tipo = input("Digite o tipo: ")
-                        tamanho = input("Digite o tamanho: ")
-                        peso = input("Digite o peso: ")
-                        tupla = (nome,marca,modelo,descricao,preco,tipo,tamanho,peso)
-                        print(tupla)
-                        escolha2 = int(input("Escolha (1) para cadastrar usuário, escolha (2) para cadastrar produto, escolha (0) para sair: "))
-
-                    elif escolha2 ==0:
-                        break
-                        
-
-                # except:
-
-                #     escolha2 = int(input("Escolha (1) para cadastrar usuário, escolha (2) para cadastrar produto, escolha (0) para sair: "))
-
-            
-        elif escolha ==2:
-            escolha2 = int(input("Escolha (1) para listar usuário, escolha (2) para listar produto, escolha (0) para sair: "))
-        elif escolha ==3:
-            escolha2 = int(input("Escolha (1) para atualizar usuário, escolha (2) para atualizar produto, escolha (0) para sair: "))
-        elif escolha ==4:
-            escolha2 = int(input("Escolha (1) para deletar usuário, escolha (2) para deletar produto, escolha (0) para sair: "))    
-
-    except:
-        escolha = int(input("Escolha (1) para cadastar, escolha (2) para listar, escolha (3) atualizar, escolha(4) para deletar e escolha (0) para sair: "))
+while True:
+        print("\nLista de produtos:")
+        print("1. Cadastro de usuário")
+        print("2. Listagem de usuário")
+        print("3. Fazer consulta de usuário por ID")
+        print("4. Fazer atualização de usuário")
+        print("5. Apagar usuário")
+        print("6. Log out")
+ 
+        opc = input("Escolha umas das opção a seguir: ")
+ 
+        if opc == "1":
+            nome = input("Qual o nome: ")
+            cpf = input("Digite o cpf: ")
+            email = input("Qual o email: ")
+            telefone = input("Qual o telefone: ")
+            endereco = input("Qual o endereço: ")
+            cidade = input("Qual a cidade: ")
+            pessoa = (nome,cpf,email,telefone,endereco,cidade)
+            pessoa = Pessoa()
+            pessoa.cadastrar()
+ 
+        elif opc == "2":
+            produtos = db.select_all_products()
+            print("\nListando os produtos...:")
+            for produto in produtos:
+                print(produto)
+ 
+        elif opc == "3":
+            product_id = int(input("Digite qual é o ID do produto: "))
+            produto = db.select_product_by_id(product_id)
+            print("\nAqui estao os detalhes do produto:")
+            print(produto)
+ 
+        elif opc == "4":
+            product_id = int(input("Qual é o ID do produto que deseja atualizar: "))
+            nome = input("Qual é o novo nome do produto: ")
+            descr = input("Digite qual é a nova descrição: ")
+            valor = float(input("Digite qual é o novo preço: "))
+            qtd = int(input("Digite qual é a nova quantidade: "))
+            db.update_product(product_id, nome, descr, valor, qtd)
+ 
+        elif opc == "5":
+            product_id = int(input("Qual seria o ID do produto que deseja excluir: "))
+            db.delete_product(product_id)
+ 
+        elif opc == "6":
+            print("Log out...")
+            break
+ 
+        else:
+            print("Essa opção não é valida tente novamente.")
