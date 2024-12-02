@@ -17,18 +17,18 @@ class Produto():
         res =  self.banco.insert_product(tupla)
         return res
     
-    def selecionar(self):
-        dados = self.banco.select_client()
+    def selecionarProduto(self):
+        dados = self.banco.select_product()
         return dados
         
-    def selecionar_por_id(self,id):
-        dado = self.banco.select_client_by_id(id)
+    def selecionarProduto_por_id(self,id):
+        dado = self.banco.select_product_by_id(id)
         return list(dado)
         
-    def atualizar(self,lista):
-        res = self.banco.update_client(lista)
+    def atualizarProduto(self,lista):
+        res = self.banco.update_product(lista)
         return res
         
-    def deletar(self,id):
-        res = self.banco.delete_client(id)
+    def deletarProduto(self,id):
+        res = self.banco.delete_product(id)
         return res

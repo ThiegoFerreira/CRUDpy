@@ -30,6 +30,7 @@ class Database():
 
         finally:
             self.close_connection()
+
     def insert_product(self,param:tuple):
         self.connect()
         try:
@@ -60,17 +61,17 @@ class Database():
 
         finally:
             self.close_connection()
+    
     def select_product(self):
         self.connect()
         try:
-            self.cursor.execute("SELECT * FROM produto;")
+            self.cursor.execute("SELECT * FROM produto")
             produtos = self.cursor.fetchall()
-            
-            return produtos
 
+            return produtos
         except Exception as error:
             print(error)
-
+        
         finally:
             self.close_connection()
 
@@ -87,6 +88,19 @@ class Database():
         finally:
             self.close_connection()
 
+    def select_product_by_id(self,id):
+        self.connect()
+        try:
+            self.cursor.execute(f"SELECT * FROM produto WHERE id = {id}")
+            produto = self.cursor.fetchone()
+            return produto
+        
+        except Exception as error:
+            print(error)
+
+        finally:
+            self.close_connection()
+        
     def update_client(self,lista):
         self.connect()
         try:
@@ -110,10 +124,49 @@ class Database():
         finally:
             self.close_connection()
 
+    def update_product(self,lista):
+        self.connect()
+        try:
+
+            self.cursor.execute(f"""
+                                UPDATE produto
+                                SET nome = '{lista[1]}',
+                                marca = '{lista[2]}',
+                                modelo = '{lista[2]}',
+                                descricao = '{lista[2]}',
+                                preco = '{lista[2]}',
+                                tipo = '{lista[2]}',
+                                tamanho = '{lista[2]}',
+                                peso = '{lista[2]}'
+                                WHERE id = {lista[0]}
+                                """)
+            self.conn.commit()
+            return True
+        
+        except Exception as error:
+            print(error)
+        
+        finally:
+            self.close_connection()
+
     def delete_client(self,id):
         self.connect()
         try:
             self.cursor.execute(f"DELETE FROM pessoa WHERE id = {id}")
+            self.conn.commit()
+            return True
+            
+
+        except Exception as error:
+            print(error)
+        
+        finally:
+            self.close_connection()
+
+    def delete_product(self,id):
+        self.connect()
+        try:
+            self.cursor.execute(f"DELETE FROM produto WHERE id = {id}")
             self.conn.commit()
             return True
             
